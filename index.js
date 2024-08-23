@@ -2,13 +2,14 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config();
 const Question = require("./models/question.model");
 
 app.use(express.json());
 app.use(cors());
 mongoose
 	.connect(
-		"mongodb+srv://leo-binbauer:CMk3XvpALGDfbyZA@millionaire-questions.ubtzv.mongodb.net/?retryWrites=true&w=majority&appName=millionaire-questions"
+		`mongodb+srv://leo-binbauer:${process.env.DATABASE_KEY}@millionaire-questions.ubtzv.mongodb.net/?retryWrites=true&w=majority&appName=millionaire-questions`
 	)
 	.then(() => {
 		console.log("connected");
