@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 //so bad without typescript
 const question = mongoose.Schema({
+	num: Number,
 	content: String,
 	isCurrentQuestion: Boolean,
 	answers: [

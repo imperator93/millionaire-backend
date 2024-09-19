@@ -1,10 +1,12 @@
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
-const Question = require("./models/question.model");
 
+const Question = require("./models/question.model");
+const TrueQuestion = require("./models/trueQuestion.model");
+
+const app = express();
 app.use(express.json());
 app.use(cors());
 mongoose
@@ -74,6 +76,34 @@ app.delete("/question/:id", async (req, res) => {
 		await Question.findByIdAndDelete(req.params.id);
 		res.status(200).json({
 			message: "question deleted",
+		});
+	} catch (err) {
+		res.status(500).json({
+			message: err.message,
+		});
+	}
+});
+
+//true questions
+app.post("/true-questions", async (req, res) => {
+	try {
+		const trueQuestion = await TrueQuestion.create(req.body);
+		res.status(200).json({
+			message: "question created",
+			trueQuestion,
+		});
+	} catch (err) {
+		res.status(500).json({
+			message: err.message,
+		});
+	}
+});
+
+app.get("/true-questions", async (req, res) => {
+	try {
+		const trueQuestions = await TrueQuestion.find({});
+		res.status(200).json({
+			trueQuestions: trueQuestions,
 		});
 	} catch (err) {
 		res.status(500).json({
