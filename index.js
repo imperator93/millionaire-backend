@@ -103,7 +103,7 @@ app.get("/true-questions", async (req, res) => {
 	try {
 		const trueQuestions = await TrueQuestion.find({});
 		res.status(200).json({
-			trueQuestions: trueQuestions,
+			questions: trueQuestions,
 		});
 	} catch (err) {
 		res.status(500).json({
